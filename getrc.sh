@@ -26,7 +26,7 @@ if [ ! -d "./vim" ]
 then
     mkdir -p "./vim"
 fi
-cp $HOME/.vimrc ./zsh/vimrc
+cp $HOME/.vimrc ./vim/vimrc
 
 echo "##################################"
 echo "## Get Tmux RC files"
@@ -35,13 +35,13 @@ if [ ! -d "./tmux" ]
 then
     mkdir -p "./tmux"
 fi
-cp $HOME/.tmux.conf ./zsh/tmux.conf
+cp $HOME/.tmux.conf ./tmux/tmux.conf
 
 echo "##################################"
 echo "## Get clang-format RC files"
 echo "##################################"
-if [ ! -d "./clang-format" ]
+if [ ! -d "./clang" ]
 then
-    mkdir -p "./clang-format"
+    mkdir -p "./clang"
 fi
-cp $HOME/.clang-format ./zsh/clang-format
+cp $HOME/.clang-format ./clang/clang-format
