@@ -1,0 +1,124 @@
+" vimrc custom configuration
+" save the rc file in github folder
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim' 
+Plugin 'tpope/vim-fugitive'
+Plugin 'preservim/nerdtree'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'git://github.com/rhysd/vim-clang-format'
+Plugin 'git://github.com/ycm-core/YouCompleteMe'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" colorschemes
+colorscheme slate
+
+" space and tabs
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " tab width
+set expandtab       " tabs are spaces
+set autoindent		" enable auto indentation
+set smartindent    	" enable smart choice of indent
+set cindent 		" stricter rules for c-program
+set pastetoggle=<f5>
+
+" UI config
+set number          " show numberline
+set showcmd         " show command in  bottom bar
+filetype indent on  " load filetype-specific indent files
+set wildmenu        " visual autocomplete for command menu
+set lazyredraw      " redraw only when we need to
+set showmatch       " highlight matching [{()}]
+set laststatus=2
+
+" Searching
+set incsearch       " search as characters are entered
+set hlsearch        " highlight matches
+
+" NERDTree related settings
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
+
+" vimdiff colour pallet "
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+
+" cpp highlighting "
+let g:cpp_class_scope_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_concepts_highliaght = 1
+
+" cscope "
+set nocscopeverbose
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+inoremap <s-tab> <c-n>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" VIM resize split tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <S-up> :ResizeUp<CR>
+nnoremap <S-down> :ResizeDown<CR>
+nnoremap <S-left> :ResizeLeft<CR>
+nnoremap <S-right> :ResizeRight<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" VIM resize split tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <S-up> :ResizeUp<CR>
+nnoremap <S-down> :ResizeDown<CR>
+nnoremap <S-left> :ResizeLeft<CR>
+nnoremap <S-right> :ResizeRight<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Example of convenience mappings:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent><F3> :NEXTCOLOR<cr>
+map <silent><F2> :PREVCOLOR<cr>
+map <silent><F4> :SCROLLCOLOR<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Example of convenience mappings:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <S-f> :FZF<CR>
+nnoremap <S-t> :Tags<CR>
+nnoremap <C-f> :ClangFormat<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" vim-clang-format styling:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:clang_format#detect_style_file = 1
+let g:clang_format#auto_format = 1
