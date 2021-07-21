@@ -6,4 +6,8 @@ alias tower-vpn="$HOME/.Software/forticlientsslvpn/64bit/forticlientsslvpn_cli -
 # tower machine alias
 alias infradev10="ssh ugupta@infradev10.skae.tower-research.com"
 alias uguptalinux="ssh ugupta@uguptalinux.gurg-off.tower-research.com"
+alias uguptalinux1="ssh ugupta@uguptalinux1.gurg-off.tower-research.com"
+
+# utility aliases
+alias ll='ls -lhF --group-directories-first'
 
